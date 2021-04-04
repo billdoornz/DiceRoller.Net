@@ -1,4 +1,5 @@
 # DiceRoller.Net
+A .Net dice roller based on the [Irony](https://github.com/IronyProject/Irony) language kit.
 
 ## Examples
 
