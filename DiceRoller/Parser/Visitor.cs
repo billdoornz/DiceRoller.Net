@@ -7,7 +7,7 @@ using Irony.Parsing;
 
 namespace DiceRoller.Parser
 {
-    public sealed class Visitor
+    public class Visitor
     {
         private readonly IRandomNumberGenerator _randomNumberGenerator;
 
@@ -54,13 +54,10 @@ namespace DiceRoller.Parser
             var isExploding = postfix == "!";
             const int maxExplodingCount = 10;
 
-            var roll = RollGenerator(dice, isExploding)
-                .Take(count)
-                .Select(r => new DiceRoll[] { r }
-                    .Concat(RollGenerator(dice, isExploding))
-                    .TakeUntilInclusive((e, i) => !e.Exploded || i >= maxExplodingCount)
+            var roll = Enumerable.Range(0, count)
+                .Select(_ => RollGenerator(dice, isExploding)
+                    .TakeUntilInclusive((r, i) => !r.Exploded || i >= maxExplodingCount)
                 )
-                .ToArray()
                 .SelectMany(r => r)
                 .ToArray();
 
