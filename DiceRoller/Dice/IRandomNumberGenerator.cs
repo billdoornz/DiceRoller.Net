@@ -1,7 +1,7 @@
 ﻿namespace DiceRoller.Dice
 {
-  public interface IRandomNumberGenerator
-  {
-    int Next(int maxValue);
-  }
+    public interface IRandomNumberGenerator
+    {
+        int Next(int maxValue);
+    }
 }

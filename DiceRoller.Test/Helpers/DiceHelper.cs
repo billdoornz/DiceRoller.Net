@@ -3,20 +3,20 @@ using Moq;
 
 namespace DiceRoller.Test.Helpers
 {
-  public static class DiceHelper
-  {
-    public static IRandomNumberGenerator GetSequenceGenerator(params int[] sequence)
+    public static class DiceHelper
     {
-      var randomNumberGeneratorMock = new Mock<IRandomNumberGenerator>();
-      var setup = randomNumberGeneratorMock
-        .SetupSequence(foo => foo.Next(It.IsAny<int>()));
+        public static IRandomNumberGenerator GetSequenceGenerator(params int[] sequence)
+        {
+            var randomNumberGeneratorMock = new Mock<IRandomNumberGenerator>();
+            var setup = randomNumberGeneratorMock
+                .SetupSequence(foo => foo.Next(It.IsAny<int>()));
 
-      foreach (var value in sequence)
-      {
-        setup = setup.Returns(value - 1);
-      }
+            foreach (var value in sequence)
+            {
+                setup = setup.Returns(value - 1);
+            }
 
-      return randomNumberGeneratorMock.Object;
+            return randomNumberGeneratorMock.Object;
+        }
     }
-  }
 }
